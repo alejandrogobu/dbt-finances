@@ -23,12 +23,12 @@ models:
     description: Data for each category.
     columns: 
       - name: category_id
-        description: Unique id for each category -> seq8().
+        description: ID incremental for each category.
         tests:
           - not_null
           - unique
       - name: hash
-        description: Hash for each category -> md5().
+        description: Hash for each category.
         tests:
           - not_null
           - unique

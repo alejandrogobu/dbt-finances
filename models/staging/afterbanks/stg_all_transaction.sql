@@ -5,6 +5,8 @@ with stg_all_transaction as (
 union
 
   select * from {{ref('stg_myinvestor')}}
+
+  order by date asc
 )
 
 

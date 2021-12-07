@@ -1,3 +1,4 @@
+
 with dim_category as (
 
     select

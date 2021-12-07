@@ -1,8 +1,6 @@
 with all_raw as(
 
-select * from {{ref('stg_caixa')}}
-  union all
-select * from {{ref('stg_myinvestor')}}
+select * from {{ref('stg_all_transaction')}}
 
 ),
 

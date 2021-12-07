@@ -1,0 +1,134 @@
+version: 2
+
+models:
+  - name: stg_account
+    description: Data for each account.
+    columns: 
+      - name: account_id
+        description: Unique id for each account.
+        tests:
+          - not_null
+          - unique
+      - name: account_name
+        description: Account name.
+        tests:
+          - not_null
+          - unique
+      - name: bank
+        description: Bank of this account.
+        tests:
+          - not_null
+
+  - name: stg_category
+    description: Data for each category.
+    columns: 
+      - name: category_id
+        description: Unique id for each category -> seq8().
+        tests:
+          - not_null
+          - unique
+      - name: hash
+        description: Hash for each category -> md5().
+        tests:
+          - not_null
+          - unique
+      - name: original_category
+        description: Category without replace strange characters.
+        tests:
+          - not_null
+          - unique
+      - name: category
+        description: Category with replace characters.
+        tests:
+          - not_null
+          - unique
+
+  - name: stg_caixa
+    description: Caixa data RAW.
+    columns: 
+      - name: id
+        description: Calculate an id unique for each transaction (YYYYMMDD)*100000+_row concat with account_id.
+        tests:
+          - not_null
+          - unique
+      - name: id_order_transaction
+        description: Calculate an id for each transaction to have the possiblity to order (YYYYMMDD)*100000+_row.
+        tests:
+          - not_null
+      - name: date
+        description: Date for each transaction -> YYYY-MM-DD.
+        tests:
+          - not_null
+      - name: amount
+        description: Amount for each transaction (€).
+        tests:
+          - not_null
+      - name: account_balance
+        description: Account Balance after this transaction (€).
+        tests:
+          - not_null
+      - name: description
+        description: Transaction description.
+        tests:
+          - not_null
+      - name: category
+        description: Category created automatically by Afterbanks.
+        tests:
+          - not_null
+      - name: account_name
+        description: Account name.
+        tests:
+          - not_null
+      - name: bank
+        description: Bank for this account.
+        tests:
+          - not_null
+      - name: etl_load
+        description: Date when the data was insert.
+        tests:
+          - not_null
+
+  - name: stg_myinvestor
+    description: Myinvestor data RAW.
+    columns: 
+      - name: id
+        description: Calculate an id unique for each transaction (YYYYMMDD)*100000+_row concat with account_id.
+        tests:
+          - not_null
+          - unique
+      - name: id_order_transaction
+        description: Calculate an id for each transaction to have the possiblity to order (YYYYMMDD)*100000+_row.
+        tests:
+          - not_null
+      - name: date
+        description: Date for each transaction -> YYYY-MM-DD.
+        tests:
+          - not_null
+      - name: amount
+        description: Amount for each transaction (€).
+        tests:
+          - not_null
+      - name: account_balance
+        description: Account Balance after this transaction (€).
+        tests:
+          - not_null
+      - name: description
+        description: Transaction description.
+        tests:
+          - not_null
+      - name: category
+        description: Category created automatically by Afterbanks.
+        tests:
+          - not_null
+      - name: account_name
+        description: Account name.
+        tests:
+          - not_null
+      - name: bank
+        description: Bank for this account.
+        tests:
+          - not_null
+      - name: etl_load
+        description: Date when the data was insert.
+        tests:
+          - not_null

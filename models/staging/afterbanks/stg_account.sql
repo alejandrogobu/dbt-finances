@@ -1,10 +1,10 @@
 with account as (
 
-  select distinct account_id,account_name,bank from {{ref('stg_caixa')}}
+  select top 1 account_id,account_name,bank from {{ref('stg_caixa')}}
   
-union all 
+union
 
-  select distinct account_id,account_name,bank from {{ref('stg_myinvestor')}}
+  select top 1 account_id,account_name,bank from {{ref('stg_myinvestor')}}
 )
 
 

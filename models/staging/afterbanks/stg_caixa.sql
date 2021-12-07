@@ -1,7 +1,7 @@
 with caixa as (
     select
-    concat((year(to_date(fecha, 'DD/MM/YY'))*10000+month(to_date(fecha, 'DD/MM/YY'))*100+day(to_date(fecha, 'DD/MM/YY')))*100000+_row,cuenta) as id, -- Calculate an id unique for each movement
-    (year(to_date(fecha, 'DD/MM/YY'))*10000+month(to_date(fecha, 'DD/MM/YY'))*100+day(to_date(fecha, 'DD/MM/YY')))*100000+_row as id_order_movement, -- Calculate an id for each movement to have the possiblity to order
+    concat((year(to_date(fecha, 'DD/MM/YY'))*10000+month(to_date(fecha, 'DD/MM/YY'))*100+day(to_date(fecha, 'DD/MM/YY')))*100000+_row,cuenta) as id, -- Calculate an id unique for each transaction
+    (year(to_date(fecha, 'DD/MM/YY'))*10000+month(to_date(fecha, 'DD/MM/YY'))*100+day(to_date(fecha, 'DD/MM/YY')))*100000+_row as id_order_transaction, -- Calculate an id for each transaction to have the possiblity to order
     to_number(cuenta) as account_id,
     to_date(fecha, 'DD/MM/YY') as date,
     importe as amount,

@@ -1,0 +1,81 @@
+version: 2
+
+models:
+  - name: dim_account
+    description: Dimension for accounts.
+    columns: 
+      - name: account_id
+        description: Unique id for each account.
+        tests:
+          - not_null
+          - unique
+      - name: account_name
+        description: Account name.
+        tests:
+          - not_null
+          - unique
+      - name: bank
+        description: Bank of this account.
+        tests:
+          - not_null
+
+  - name: dim_category
+    description: Dimension for categorys.
+    columns: 
+      - name: category_id
+        description: Unique id for each category.
+        tests:
+          - not_null
+          - unique
+      - name: category
+        description: Category with replace characters.
+        tests:
+          - not_null
+          - unique
+
+  - name: fct_transaction
+    description: Fact table with all transaction.
+    columns: 
+      - name: id
+        description: Unique for each transaction -> (YYYYMMDD)*100000 + _row concat with account_id.
+        tests:
+          - not_null
+          - unique
+      - name: id_order_transaction
+        description: Id to order each transaction -> (YYYYMMDD)*100000 + _row.
+        tests:
+          - not_null
+      - name: account_id
+        description: Foreign key dim_account.
+        tests:
+          - not_null
+          - relationships:
+                to: ref('dim_account')
+                field: account_id
+      - name: date
+        description: Date for each transaction -> YYYY-MM-DD.
+        tests:
+          - not_null
+      - name: description
+        description: Transaction description.
+        tests:
+          - not_null
+      - name: category_id
+        description: Foreign key dim_category.
+        tests:
+          - not_null
+          - relationships:
+                to: ref('dim_category')
+                field: category_id
+      - name: amount
+        description: Amount for each transaction (€).
+        tests:
+          - not_null
+      - name: account_balance
+        description: Account balance after this transaction (€).
+        tests:
+          - not_null
+      - name: etl_load
+        description: Date when the data was insert.
+        tests:
+          - not_null

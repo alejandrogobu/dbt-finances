@@ -132,3 +132,48 @@ models:
         description: Date when the data was insert.
         tests:
           - not_null
+
+  - name: stg_all_transaction
+    description: All data RAW -> Append using UNION.
+    columns: 
+      - name: id
+        description: Calculate an id unique for each transaction (YYYYMMDD)*100000+_row concat with account_id.
+        tests:
+          - not_null
+          - unique
+      - name: id_order_transaction
+        description: Calculate an id for each transaction to have the possiblity to order (YYYYMMDD)*100000+_row.
+        tests:
+          - not_null
+      - name: date
+        description: Date for each transaction -> YYYY-MM-DD.
+        tests:
+          - not_null
+      - name: amount
+        description: Amount for each transaction (€).
+        tests:
+          - not_null
+      - name: account_balance
+        description: Account Balance after this transaction (€).
+        tests:
+          - not_null
+      - name: description
+        description: Transaction description.
+        tests:
+          - not_null
+      - name: category
+        description: Category created automatically by Afterbanks.
+        tests:
+          - not_null
+      - name: account_name
+        description: Account name.
+        tests:
+          - not_null
+      - name: bank
+        description: Bank for this account.
+        tests:
+          - not_null
+      - name: etl_load
+        description: Date when the data was insert.
+        tests:
+          - not_null

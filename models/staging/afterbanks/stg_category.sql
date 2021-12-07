@@ -1,10 +1,7 @@
-with all_raw as (
+with all_category as (
 
-  select distinct category from {{ref('stg_caixa')}}
-  
-union
+  select distinct category from {{ref('stg_all_transaction')}}
 
-  select distinct category from {{ref('stg_myinvestor')}}
 ),
 
 
@@ -16,7 +13,7 @@ remove_characters as (
   category as original_category,
   TRANSLATE(category, 'ÛÌÈ', 'óíé') as category
 
-from all_raw
+from all_category
 order by category_id asc
 
 )

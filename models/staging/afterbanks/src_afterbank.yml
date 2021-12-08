@@ -107,3 +107,54 @@ sources:
             description: Datetime when the data was synced.
             tests:
               - not_null
+
+      - name: inversis
+        description: Raw Data from Inversis.
+        columns:
+          - name: _row
+            description: Primary key, incremental number for each transaction.
+            tests:
+              - unique
+              - not_null
+          - name: fecha
+            description: Date for each Transaction.
+            tests:
+              - not_null
+          - name: fecha_valor
+            description: Date when this Transaction occurs.
+            tests:
+              - not_null
+          - name: importe
+            description: Amount for each Transaction (€).
+            tests:
+              - not_null
+          - name: balance_en_cuenta
+            description: Account Balance after this transaction (€).
+            tests:
+              - not_null
+          - name: descripci_un
+            description: Description for each transaction.
+            tests:
+              - not_null
+          - name: categoria
+            description: Category for each transaction, created by Afterbanks.
+            tests:
+              - not_null
+          - name: cuenta
+            description: The account number.
+            tests:
+              - not_null
+              - accepted_values:
+                    values: ['28654144'] # Validate that we have data for the corrrect account.  
+          - name: nombre_cuenta
+            description: The account name.
+            tests:
+              - not_null
+          - name: banco
+            description: The bank name.
+            tests:
+              - not_null
+          - name: _fivetran_synced
+            description: Datetime when the data was synced.
+            tests:
+              - not_null

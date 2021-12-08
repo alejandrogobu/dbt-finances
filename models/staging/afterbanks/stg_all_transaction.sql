@@ -6,6 +6,10 @@ union
 
   select * from {{ref('stg_myinvestor')}}
 
+union 
+
+  select * from {{ref('stg_inversis')}}
+
   order by date asc
 )
 

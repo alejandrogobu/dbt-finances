@@ -1,3 +1,10 @@
+{{
+    config(
+        materialized='table'
+    )
+}}
+
+
 with dim_account as (
 
     select

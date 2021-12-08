@@ -6,7 +6,7 @@ union
 
   select * from {{ref('stg_myinvestor')}}
 
-union 
+union
 
   select * from {{ref('stg_inversis')}}
 

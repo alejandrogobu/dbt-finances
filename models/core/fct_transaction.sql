@@ -1,10 +1,10 @@
-with all_raw as(
+{{
+    config(
+        materialized='incremental'
+    )
+}}
 
-select * from {{ref('stg_all_transaction')}}
-
-),
-
-fct_transaction as (
+with fct_transaction as (
 
 select
 
@@ -18,9 +18,16 @@ select
   A.account_balance as account_balance,
   A.etl_load as etl_load
 
-from all_raw A
+from {{ref('stg_all_transaction')}} A
 inner join  {{ref('stg_category')}} B
 on A.category = B.original_category
 )
 
 select * from fct_transaction
+
+{% if is_incremental() %}
+
+  -- this filter will only be applied on an incremental run
+  where date > (select max(date) from {{ this }})
+
+{% endif %}
